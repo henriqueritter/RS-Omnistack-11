@@ -45,9 +45,9 @@ Criando hello world Node.
 
 Framework (biblioteca/ferramenta que fornece um conjunto de funcionalidades que todo projeto node tem).
 
-Vamos instalar o framework 'express' com o comando : 'npm install express'
+Vamos instalar o framework 'express' com o comando : 'npm install express' (executado dentro da pasta backend)
 
 O Framework Express auxilia na criação de rotas e tratamento de parametros na URL, ele é um MICRO-framwork pois possui poucas funcionalidades.
 
-
+Após instalar o 'express' podemos ver dentro do arquivo package.json na propriedade dependencies o 'express' e sua versão.
 
