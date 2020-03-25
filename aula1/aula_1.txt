@@ -69,3 +69,4 @@ Por ter usado a funcao listen('porta').   o comando node index.js continuara exe
 Mensagem Cannot GET /   
 Significa que nossa aplicação não possui nenhuma rota criada.
 
+41:56
