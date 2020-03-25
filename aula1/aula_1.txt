@@ -36,5 +36,18 @@ A Comunicação entre o Back-end e o Front-end é feita pela estrutura JSON.
 JSON (JAVASCRIPT OBJECT NOTATION)
 
 
+Criando hello world Node.
+
+-crie uma pasta backend no seu projeto.
+-acesse a pasta backend e rode o comando no terminal: 'npm init -y'
+    --ele ira gerar um package.json dentro da pasta.
+
+
+Framework (biblioteca/ferramenta que fornece um conjunto de funcionalidades que todo projeto node tem).
+
+Vamos instalar o framework 'express' com o comando : 'npm install express'
+
+O Framework Express auxilia na criação de rotas e tratamento de parametros na URL, ele é um MICRO-framwork pois possui poucas funcionalidades.
+
 
 
