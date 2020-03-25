@@ -1,0 +1,40 @@
+Topicos aula 2 Omnistack 11
+
+-Node.js & Express
+    -Rotas e recursos
+    -Metodos HTTP
+    -Tipos de parametros
+-Configurando Nodemon
+-Utilizando o insomnia
+-Diferenças entre bancos de dados
+-Configurando banco de dados
+-Pensando nas entidades e funcionalidades
+-Construção do back-end
+-Adicionando módulo CSS
+-Enviando back-end ao Github
+
+
+Dentro do Node
+app.get('/', (request, response)
+onde passamos a rota na verdade nos referimos ao recurso, por exemplo
+recurso de usuarios que queremos acessar:
+app.get('/users', (request, response)
+
+Rota é o conjunto completo com o endereço/recurso
+
+Recurso costuma estar associado a alguma
+
+
+#Metodos HTTP
+
+app.get  siginfica que estamos usando a rota pelo metodo GET
+
+GET= Busca informacoes no backend
+POST= Cria uma informacao no backend
+PUT= Altera uma informacao no backend
+DELETE= deleta no backend
+
+#Insomnia
+
+-Instalar o insomnia do site insomnia.rest
+Ele é usado para criar requisições
