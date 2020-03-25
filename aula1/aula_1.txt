@@ -59,7 +59,16 @@ const express = require('express');
 '
 Onde a constante express terá todas as funcionalidades do express disponiveis
 
+Para colocar o node para escutar em alguma porta coloque apos ter declarado o require('express');
+
+app.listen('porta');
+
+Para gerar a rota das paginas use no express
+
+app.get('/');
+
 Para instanciar a aplicaçao faça no terminal
+
 
 node index.js
 
@@ -69,4 +78,62 @@ Por ter usado a funcao listen('porta').   o comando node index.js continuara exe
 Mensagem Cannot GET /   
 Significa que nossa aplicação não possui nenhuma rota criada.
 
-41:56
+
+Instalar extensão JSON VIEWER no google Chrome para ajudar a visualizar as JSON
+
+
+#### Entendendo o REACT
+
+Abordagem tradicional: nesse tipo a cada requisição, o servidor retorna o conteúdo completo da página, contendo todo HTML e CSS.
+Essa abordagem limita o front-end para o browser ja que o aplicativo mobile ou serviços não vão conseguir interpretar o HTML.
+
+Abordagem tradicional: browser requisita uma página, um conteudo, e o backend(Node JS) retorna uma resposta HTML(monta os dados na pag HTML) com as informações solicitadas
+
+
+Abordagem de SPA
+(single-page applications)
+
+a parte do Browser fica o front end( com HTML CSS JAVASCRIPT) e faz requisicao para o BACKEND e o BACKEND retorna a resposta em JSON.
+
+Isso exime o servidor de ficar enviando a parte do front end
+
+apenas os dados são entregues como resposta para preencher o front end.
+
+esse tipo de pagina nunca recarrega, otimizando a performance dando vida ao conceito de SPA. retornando apenas JSON podemos ter quantos front-ends quisermos.
+
+React é quem cria o HTML dentro da nossa pagina.mspai
+React nao precisamos obrigatoriamente carregar o HTML a cada Rota.
+
+Ferramenta create react app  (cria uma aplicacao react inicial )
+Tambem podemos usar a ferramenta npx create-react-app nomeDoProjeto
+
+Após o npx create-react-app meuProjeto ele irá criar os arquivos necessarios(demora um pouco).
+
+Você acessa a pasta do seu projeto e executa o  comando 'npm start' que vai executar um script start que esta dentro do package.json
+
+O React costuma rodar na porta 3000
+
+
+#### React NATIVE
+
+Todo codigo é feito em Javascript, esscodigo NÃO é convertido em codigo nativo, o dispositivo passa a entender Javascript e a interface gerada é totalmente nativa.
+
+no react native ele usa o JAVASCRIPT CORE para ser entendido pelo sistema operacional
+
+
+# Por que utilizaremos o Expo?
+
+Sem o Expo precisamos instalar em nosso sistema tanto o Android Studio para obeter a SDK de dev android, e o Xcode(apenas MAC) para obter a SDK do iOS.
+Nesse caso, nossa iniciação do desenvolvimento fica menos penosa, ja que essas SDK's não são extremamente simples de instalar e livres de erros.
+
+O Expo é um framework(colecao de ferramentas) para React Native que auxilia a usar as funcionalidades do smartphone como sensores, mapas etc..
+
+Com o expo nos instalamos um aplicativo no celular chamado Expo, e dentro dele, tudo que precisamos para desenvolver no React Native, ja instalado como as API's de mapas, geolocalização, camera, sensores, calendario e etc..
+
+Com isso não precisamos nos preocupar em gerar o aplicativo para Android e iOSja que o app do Expo instalado tem tudo o que precisamos e assim usamos apenas React.
+
+
+
+
+
+
