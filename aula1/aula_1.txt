@@ -1,0 +1,40 @@
+Dia 1 Omnistack
+https://www.youtube.com/watch?time_continue=156&v=Hfe28D4cFQA&feature=emb_logo
+
+para instalar o node
+siga o passo a passo
+https://nodejs.org/en/download/package-manager/#windows
+
+
+Para configurar o VSCODE
+adicione as extensões
+DRACULA(opcional)
+MATERIAL ICON THEME (ajuda a alterar os icones dos arquivos JS, node, html etc..)
+
+
+
+Back-end é aquilo que o usuário não vê, é onde fica as:
+-regras de negocio
+-Conexão com o BD
+-Envio de e-mail
+-Comunicação com webservices.
+-Autenticação do usuário
+-Criptografia e segurança
+
+
+Vamos construir uma API RESTFUL
+API Aplication Programming Interface(aplicacao que nao tem parte visual no backend)
+
+Quando a API é RESTFUL ela esta seguindo uma quantidade de regras que outras pessoas ja estao acostumadas
+
+
+BACKEND: NODE
+FRONT-END: REACT; REACT NATIVE; ANDROID PURO;
+
+A Comunicação entre o Back-end e o Front-end é feita pela estrutura JSON.
+
+JSON (JAVASCRIPT OBJECT NOTATION)
+
+
+
+
