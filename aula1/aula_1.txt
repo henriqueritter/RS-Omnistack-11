@@ -49,5 +49,23 @@ Vamos instalar o framework 'express' com o comando : 'npm install express' (exec
 
 O Framework Express auxilia na criação de rotas e tratamento de parametros na URL, ele é um MICRO-framwork pois possui poucas funcionalidades.
 
-Após instalar o 'express' podemos ver dentro do arquivo package.json na propriedade dependencies o 'express' e sua versão.
+Após instalar o 'express' podemos ver dentro do arquivo package.json na propriedade dependencies o objeto 'express' e sua versão instalada.
+
+
+Para importar uma dependencia para a aplicaçao faça
+'
+//exemplo importanto express
+const express = require('express');
+'
+Onde a constante express terá todas as funcionalidades do express disponiveis
+
+Para instanciar a aplicaçao faça no terminal
+
+node index.js
+
+Por ter usado a funcao listen('porta').   o comando node index.js continuara executando (nao sera finalizado) pois ele esta escutando na porta 3333
+
+
+Mensagem Cannot GET /   
+Significa que nossa aplicação não possui nenhuma rota criada.
 
