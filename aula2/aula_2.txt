@@ -191,3 +191,10 @@ Este modulo determina quem podera acessar nossa aplicacao
 
 Apos isso importe o cors no index.js assim
 const cors = require('cors'); 
+
+
+#### Dica Github
+Ao criar um repositorio e houver arquivos/pastas que voce NAO deseja enviar para o Github crie um arquivo chamado .gitignore 
+e dentro dele escreva o nome da pasta ou arquivo que nao deseja como exemplo, o arquivo .gitignore criado dentro da pasta backend com o conteudo
+'node_modules' (sem aspas)
+ele irá ignorar a pasta node_modules por ser pesada e desncessaria
