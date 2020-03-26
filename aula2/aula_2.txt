@@ -61,7 +61,11 @@ insomnia usamos a parte do body como JSON, dentro do app configuramos assim:
 app.use(express.json());    
 app.post('/users', (request, response) => {  //route params
     const params = request.body; 
-
+É utilizado para passar informações ao criar algo novo como um usuário por exemplo passando um tipo texto de JSON no body como(isso no insomnia no metodo POST):
+{
+	"name": "Henrique Ritter",
+	"idade": 25
+}
 
 
 #### Pacote nodemon - utilizado para evitar ter que reiniciar o node a cada alteração
@@ -69,5 +73,48 @@ app.post('/users', (request, response) => {  //route params
 para instalar faça no terminal:  npm install nodemon -D    onde o -D faz com que a informacao sobre essa dependencia(pacote) no 
 packge.json seja armezada na sessão devDependencies e não em dependencies, que é dizer qu iremos utilizar essa biblioteca apenas durante o desenvolvimento.
 
+Após instalar o nodemon precisamos criar um script de start dentro do package.json mesmo na 6 linha vamos colocar dentro dos scripts:
+{"start": "nodemon index.js"}
 
-24:20
+feito isso só chamar este script no terminal com o comando: npm start (sendo que start é o script que criamos)
+Agora a cada alteração que fizermos o nodemon irá restartar o servidor automaticamente
+
+
+#### Bancos de dados
+-SQL: MySQL, SQLite, PostgreSQL, Oracle, Microsoft SQL Server
+-NoSQL: MongoDB, CouchDB etc
+
+Vamos usar o SQLite, ele não é instalado é apenas um Arquivo .sqlite dentro da nossa aplicação.
+
+##Comunicacao com o BD
+Para fazer a comunicação com o BD podemos fazer de 3 formas
+-Driver: Se instalarmos o DRIVEr vamos ter que usar a forma SELECT * FROM users para trazer os dados de usuario
+-Query Builder: Vamos escrever as querys usando Javascript a forma fica  table('users').select('*').where()
+    Para isso usaremos o KNEX.js para QueryBuilder
+    Para instalar o KNEX.js faremos npm isntall knex
+Após isso tambem instalar o driver do sqlite3
+    comando: npm install sqlite3
+
+#DICA: npx serve para EXECUTAR algum comando/etc
+
+Para fazer crar a conexão com o banco de dados execute o npx knex init
+Com isso será criado um arquivo chamado knexfile.js na nossa pasta, ele tera as configurações de acesso ao banco de dados da nossa aplicação,
+dentro dele tem as configurações de:
+-development: ambiente de desenvolvimento da nossa maquina, enquanto estamos criando o projeto
+-production: quando o projeto ja esta online para os clientes, para acessarrem nossa aplicação
+-staging: ambiente que SIMULA A PRODUÇÃO usada para os desenvolvedores testarem.
+
+Crie uma pasta chamada src  dentro do backend
+Mova o arquivo index.js para a pasta src
+E troque o caminho do script start do package.json alterando de index.js para src/index.js
+
+Para hoje usaremos apenas o ambiente de development ficando assim dentro do arquivo knexfile.js:
+ (dentro de module.exports)
+ development: {
+     client: 'sqlite3',
+     connection: {
+         filename: './dev.sqlite3'   (arquivo que vai armazenar nossa base )
+     }
+ }
+
+
