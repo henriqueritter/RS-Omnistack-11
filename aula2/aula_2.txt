@@ -37,4 +37,37 @@ DELETE= deleta no backend
 #Insomnia
 
 -Instalar o insomnia do site insomnia.rest
-Ele é usado para criar requisições
+Ele é usado para criar requisições para fazer os testes nos metodos HTTP
+
+#Parametros
+Parametros que são enviados pela URL pelo metodo GET para retornar algum dado especifico
+
+ex: app.get('/users?name=Henrique', (request, response) => {
+
+    nos parametros do express request e response.  o request guarda todos os dados que vem atraves da nossa requisição, 
+    o response é o responsavel por retornar uma resposta para o usuario(como no exemplo é o response que esta retornando o json)
+    
+    para acessar os parametros do tipo query usamos o metodo request assim
+
+    const params = request.query;
+
+    ai dentro de params teremos o valor dos parametros passados url por exemplo: 'localhost:3333/users?name=Henrique'  vai retornar name: 'henrique'
+
+
+    para acessar os route params usamos o request.params da mesma  maneira do query, declarando uma constante que recebe quest.params;
+
+Request body pega o que foi passado no body, como exemplo um JSON com suas informacoes, para isso usamos o metodo POST, e no 
+insomnia usamos a parte do body como JSON, dentro do app configuramos assim: 
+app.use(express.json());    
+app.post('/users', (request, response) => {  //route params
+    const params = request.body; 
+
+
+
+#### Pacote nodemon - utilizado para evitar ter que reiniciar o node a cada alteração
+
+para instalar faça no terminal:  npm install nodemon -D    onde o -D faz com que a informacao sobre essa dependencia(pacote) no 
+packge.json seja armezada na sessão devDependencies e não em dependencies, que é dizer qu iremos utilizar essa biblioteca apenas durante o desenvolvimento.
+
+
+24:20
