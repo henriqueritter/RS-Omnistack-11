@@ -1,19 +1,26 @@
 const express = require('express');
 
+const OngController = require('./controllers/OngController');  //Importa os controllers da Ong(insert, etc..)
+const IncidentController = require('./controllers/IncidentController');  //Importa os controllers da Ong(insert, etc..)
+const ProfileController = require('./controllers/ProfileController');
+const SessionController = require('./controllers/SessionController');  //Modulo de Login
+
 //colocando o modulo de rotas do Express dentro de uma variavel
 const routes = express.Router();
 
+routes.post('/sessions', SessionController.create);
 
-routes.post('/users', (request, response) => {  //route params
-    const params = request.body;        //request body, busca um JSON ou outro no metodo POST
-    console.log(params);
+/** Rota de Consultar ONGS */
+routes.get('/ongs', OngController.index);
+/** Rota de cadastro de ONG */
+routes.post('/ongs', OngController.create);
 
-    //return response.send('Hello World!'); //tambem podemos retornar a resposta em formato JSON
-    return response.json({ 
-        evento: 'Semana OmniStack 11.0',
-        aluno: 'Henrique Ritter '
-    });
-});
+/** Rota do Profile que retorna os incidents de uma ONG especifica */
+routes.get('/profile', ProfileController.index);
+/** Rotas dos Incidentes(casos) */
+routes.get('/incidents', IncidentController.index);
+routes.post('/incidents', IncidentController.create);
+routes.delete('/incidents/:id', IncidentController.delete);
 
-module.exports = routes;  //exporta variavel de um arquivo
+module.exports = routes;  //exporta a variavel routes variavel de um arquivo no NODE, pode ser importado em outro usando o require
 

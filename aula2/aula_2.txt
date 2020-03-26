@@ -113,8 +113,57 @@ Para hoje usaremos apenas o ambiente de development ficando assim dentro do arqu
  development: {
      client: 'sqlite3',
      connection: {
-         filename: './dev.sqlite3'   (arquivo que vai armazenar nossa base )
+         filename: './dev.sqlite3'   (arquivo que vai armazenar nossa base, no nosso caso  => filename: './src/database/db.sqlite')
      }
  }
 
+
+module.exports = routes;  //exporta variavel de um arquivo no NODE
+
+E para importar faça dentro do arquivo desejado
+const routes = require('./routes');  //é necessario colocar ./  para o NODE entender que se trata de um arquivo e não um pacote
+
+
+#### Entidades da nossa aplicação
+Entidades: 
++ONG
++Caso (Incident)
+
+#### Funcionalidades que afetam as Entidades
+ONG:
+    -Login
+    -Logout
+    -Cadastro de ONG
+    -Cadastrar novos casos
+    -Listar casos especificos de uma ONG
+    -Deletar casos da ONG
+    -[Mobile] Listar todos os casos (nao especifico para uma ONG)
+    -[Mobile] Entrar em contato via E-mail/whatsapp com a ONG.
+
+
+#### Criação de tabelas
+Com KNEX o migrations conseguimos ter historicos do nosso banco, por exemplo, tabelas criadas, quando foi criado algum registro etc..
+
+Vamos começar criando uma pasta dentro do src/database chamada migrations  e vamos criar uma configuração no nosso knexfile.js chamada migrations
+e vamos passar o diretorio de onde nossas migratiosn serão armazenadas ('src/database/migrations')
+
+feito isso vamos criar nossa primeira migration com o comando  'npx knex migrate:make create_ongs'
+#DICA: para corrigir a mensagem da flag de useNullAsDefault que aparece ao executar o knex migrate, insira a configuracao 'useNullAsDefault: true' 
+dentro do arquivo knexfile.js após a configuracao do migrations dentro de development
+
+após cadastrado criamos a tabela usando a API do knex dentro do arquivo criado no src/database/migrations 
+e então rodamos o comando 'npx knex migrate:latest'
+
+Se quiser rodar o que esta dentro do knex.down para desfazer a ultima migrate:latest execute:
+npx knex migrate:rollback
+
+Para ver as migrations ja executadas  execute: npx  knex migrate:status
+
+
+Para criar o ID da ong vamos utilizar o pacote do node chamado 'crypto'
+para importar ele faça
+const crypto = require('crypto');
+
+#### Rota de Login
+Criamos um controller chamado SessonController (pois o login é uma sessão) e Logout é excluir a sessão do backend
 
