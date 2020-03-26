@@ -166,4 +166,28 @@ const crypto = require('crypto');
 
 #### Rota de Login
 Criamos um controller chamado SessonController (pois o login é uma sessão) e Logout é excluir a sessão do backend
+Controller de session
+const connection = require('../database/connection');
+module.exports = {
+    async create(request, response){
+        const { id } = request.body;
 
+        const ong = await connection('ongs')        //seleciona o nome da Ong
+                        .where('id', id)            //onde o ID dela seja igual ao passado pelo body
+                        .select('name')             //apenas o campo nome
+                        .first();                   //first para nao retornar uma array e sim apenas o valor do campo nome
+        if (!ong){      //se ong não existir 
+            return response.status(400).json({ error: 'No ONG found with this ID'}); //retorna um bad request
+        }
+
+        return response.json(ong);  //retorna o Nome da ONG
+    }
+}
+
+#### Instalando modulo de segurança CORS
+digite no terminal: 'npm install cors'
+
+Este modulo determina quem podera acessar nossa aplicacao
+
+Apos isso importe o cors no index.js assim
+const cors = require('cors'); 
