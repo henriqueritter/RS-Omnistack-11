@@ -1,0 +1,200 @@
+Topicos aula 2 Omnistack 11
+
+-Node.js & Express
+    -Rotas e recursos
+    -Metodos HTTP
+    -Tipos de parametros
+-Configurando Nodemon
+-Utilizando o insomnia
+-Diferenças entre bancos de dados
+-Configurando banco de dados
+-Pensando nas entidades e funcionalidades
+-Construção do back-end
+-Adicionando módulo CSS
+-Enviando back-end ao Github
+
+
+Dentro do Node
+app.get('/', (request, response)
+onde passamos a rota na verdade nos referimos ao recurso, por exemplo
+recurso de usuarios que queremos acessar:
+app.get('/users', (request, response)
+
+Rota é o conjunto completo com o endereço/recurso
+
+Recurso costuma estar associado a alguma
+
+
+#Metodos HTTP
+
+app.get  siginfica que estamos usando a rota pelo metodo GET
+
+GET= Busca informacoes no backend
+POST= Cria uma informacao no backend
+PUT= Altera uma informacao no backend
+DELETE= deleta no backend
+
+#Insomnia
+
+-Instalar o insomnia do site insomnia.rest
+Ele é usado para criar requisições para fazer os testes nos metodos HTTP
+
+#Parametros
+Parametros que são enviados pela URL pelo metodo GET para retornar algum dado especifico
+
+ex: app.get('/users?name=Henrique', (request, response) => {
+
+    nos parametros do express request e response.  o request guarda todos os dados que vem atraves da nossa requisição, 
+    o response é o responsavel por retornar uma resposta para o usuario(como no exemplo é o response que esta retornando o json)
+    
+    para acessar os parametros do tipo query usamos o metodo request assim
+
+    const params = request.query;
+
+    ai dentro de params teremos o valor dos parametros passados url por exemplo: 'localhost:3333/users?name=Henrique'  vai retornar name: 'henrique'
+
+
+    para acessar os route params usamos o request.params da mesma  maneira do query, declarando uma constante que recebe quest.params;
+
+Request body pega o que foi passado no body, como exemplo um JSON com suas informacoes, para isso usamos o metodo POST, e no 
+insomnia usamos a parte do body como JSON, dentro do app configuramos assim: 
+app.use(express.json());    
+app.post('/users', (request, response) => {  //route params
+    const params = request.body; 
+É utilizado para passar informações ao criar algo novo como um usuário por exemplo passando um tipo texto de JSON no body como(isso no insomnia no metodo POST):
+{
+	"name": "Henrique Ritter",
+	"idade": 25
+}
+
+
+#### Pacote nodemon - utilizado para evitar ter que reiniciar o node a cada alteração
+
+para instalar faça no terminal:  npm install nodemon -D    onde o -D faz com que a informacao sobre essa dependencia(pacote) no 
+packge.json seja armezada na sessão devDependencies e não em dependencies, que é dizer qu iremos utilizar essa biblioteca apenas durante o desenvolvimento.
+
+Após instalar o nodemon precisamos criar um script de start dentro do package.json mesmo na 6 linha vamos colocar dentro dos scripts:
+{"start": "nodemon index.js"}
+
+feito isso só chamar este script no terminal com o comando: npm start (sendo que start é o script que criamos)
+Agora a cada alteração que fizermos o nodemon irá restartar o servidor automaticamente
+
+
+#### Bancos de dados
+-SQL: MySQL, SQLite, PostgreSQL, Oracle, Microsoft SQL Server
+-NoSQL: MongoDB, CouchDB etc
+
+Vamos usar o SQLite, ele não é instalado é apenas um Arquivo .sqlite dentro da nossa aplicação.
+
+##Comunicacao com o BD
+Para fazer a comunicação com o BD podemos fazer de 3 formas
+-Driver: Se instalarmos o DRIVEr vamos ter que usar a forma SELECT * FROM users para trazer os dados de usuario
+-Query Builder: Vamos escrever as querys usando Javascript a forma fica  table('users').select('*').where()
+    Para isso usaremos o KNEX.js para QueryBuilder
+    Para instalar o KNEX.js faremos npm isntall knex
+Após isso tambem instalar o driver do sqlite3
+    comando: npm install sqlite3
+
+#DICA: npx serve para EXECUTAR algum comando/etc
+
+Para fazer crar a conexão com o banco de dados execute o npx knex init
+Com isso será criado um arquivo chamado knexfile.js na nossa pasta, ele tera as configurações de acesso ao banco de dados da nossa aplicação,
+dentro dele tem as configurações de:
+-development: ambiente de desenvolvimento da nossa maquina, enquanto estamos criando o projeto
+-production: quando o projeto ja esta online para os clientes, para acessarrem nossa aplicação
+-staging: ambiente que SIMULA A PRODUÇÃO usada para os desenvolvedores testarem.
+
+Crie uma pasta chamada src  dentro do backend
+Mova o arquivo index.js para a pasta src
+E troque o caminho do script start do package.json alterando de index.js para src/index.js
+
+Para hoje usaremos apenas o ambiente de development ficando assim dentro do arquivo knexfile.js:
+ (dentro de module.exports)
+ development: {
+     client: 'sqlite3',
+     connection: {
+         filename: './dev.sqlite3'   (arquivo que vai armazenar nossa base, no nosso caso  => filename: './src/database/db.sqlite')
+     }
+ }
+
+
+module.exports = routes;  //exporta variavel de um arquivo no NODE
+
+E para importar faça dentro do arquivo desejado
+const routes = require('./routes');  //é necessario colocar ./  para o NODE entender que se trata de um arquivo e não um pacote
+
+
+#### Entidades da nossa aplicação
+Entidades: 
++ONG
++Caso (Incident)
+
+#### Funcionalidades que afetam as Entidades
+ONG:
+    -Login
+    -Logout
+    -Cadastro de ONG
+    -Cadastrar novos casos
+    -Listar casos especificos de uma ONG
+    -Deletar casos da ONG
+    -[Mobile] Listar todos os casos (nao especifico para uma ONG)
+    -[Mobile] Entrar em contato via E-mail/whatsapp com a ONG.
+
+
+#### Criação de tabelas
+Com KNEX o migrations conseguimos ter historicos do nosso banco, por exemplo, tabelas criadas, quando foi criado algum registro etc..
+
+Vamos começar criando uma pasta dentro do src/database chamada migrations  e vamos criar uma configuração no nosso knexfile.js chamada migrations
+e vamos passar o diretorio de onde nossas migratiosn serão armazenadas ('src/database/migrations')
+
+feito isso vamos criar nossa primeira migration com o comando  'npx knex migrate:make create_ongs'
+#DICA: para corrigir a mensagem da flag de useNullAsDefault que aparece ao executar o knex migrate, insira a configuracao 'useNullAsDefault: true' 
+dentro do arquivo knexfile.js após a configuracao do migrations dentro de development
+
+após cadastrado criamos a tabela usando a API do knex dentro do arquivo criado no src/database/migrations 
+e então rodamos o comando 'npx knex migrate:latest'
+
+Se quiser rodar o que esta dentro do knex.down para desfazer a ultima migrate:latest execute:
+npx knex migrate:rollback
+
+Para ver as migrations ja executadas  execute: npx  knex migrate:status
+
+
+Para criar o ID da ong vamos utilizar o pacote do node chamado 'crypto'
+para importar ele faça
+const crypto = require('crypto');
+
+#### Rota de Login
+Criamos um controller chamado SessonController (pois o login é uma sessão) e Logout é excluir a sessão do backend
+Controller de session
+const connection = require('../database/connection');
+module.exports = {
+    async create(request, response){
+        const { id } = request.body;
+
+        const ong = await connection('ongs')        //seleciona o nome da Ong
+                        .where('id', id)            //onde o ID dela seja igual ao passado pelo body
+                        .select('name')             //apenas o campo nome
+                        .first();                   //first para nao retornar uma array e sim apenas o valor do campo nome
+        if (!ong){      //se ong não existir 
+            return response.status(400).json({ error: 'No ONG found with this ID'}); //retorna um bad request
+        }
+
+        return response.json(ong);  //retorna o Nome da ONG
+    }
+}
+
+#### Instalando modulo de segurança CORS
+digite no terminal: 'npm install cors'
+
+Este modulo determina quem podera acessar nossa aplicacao
+
+Apos isso importe o cors no index.js assim
+const cors = require('cors'); 
+
+
+#### Dica Github
+Ao criar um repositorio e houver arquivos/pastas que voce NAO deseja enviar para o Github crie um arquivo chamado .gitignore 
+e dentro dele escreva o nome da pasta ou arquivo que nao deseja como exemplo, o arquivo .gitignore criado dentro da pasta backend com o conteudo
+'node_modules' (sem aspas)
+ele irá ignorar a pasta node_modules por ser pesada e desncessaria
