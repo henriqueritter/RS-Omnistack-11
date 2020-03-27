@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+
+//JSX (Javascript XML)
+import Header from './Header';
 
 function App() {
+  const [counter, setCounter] = useState(0);
+  //Array do useState [ valorVariavel, funcaoDeAtualizacao ]
+
+  function increment(){
+    setCounter(counter + 1);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Hello OmniStack 11.0!
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header>Contador: {counter} </Header>
+      <button onClick={increment}>Incrementar</button>
     </div>
   );
 }
+
 
 export default App;
