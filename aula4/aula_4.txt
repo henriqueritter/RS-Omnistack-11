@@ -1,0 +1,108 @@
+#### Aplicação Mobile
+
+[]Instalando Expo no PC
+[]Criando projeto React Native
+[]Executnado projeto
+    [] no smartphone
+    [] emuladores
+    [] expo snacks  (para PC muito lento que nao roda emuladores)
+[] Diferença para o ReactJS
+    [] Elementos HTML
+    [] Semântica
+    [] Estilização
+        [] Flexbox
+        [] Propriedades
+        [] Herança de estilos
+        [] Estilização própria
+[] Estrutura de pastas
+[] Icone e Splash Screen (splash tela que abre antes do app carregar )
+[] Configurando navegação
+[] Página de casos
+[] Detalhe do casos
+[] Abrindo Whatsapp & E-mail
+[] Conexão com a API
+[] Enviando projeto ao Github
+
+
+###instalando o expo na nossa maquina
+
+no terminal digite: npm install -g expo-cli   //menos g signifca que será instalação GLOBAL no meu PC
+
+Após instalar o expo digite  ' expo -h' para verificar se a instalçao foi OK. (caso contrario procure expo common issues rocketseat e veja a ajuda no github da rocketseat)
+
+###Criar projeto react native
+Para iniciar o projeto digite 'expo init mobile'  na opcao de template escolha o blank
+
+###Para executar o projeto no celular
+execute 'yarn start'  (se nao funcionar execute npm start )
+
+
+ele abrirá uma pagina em http://localhost:19002/  onde aparecerá um qrQcode que precisa ser scaneado pelo app "expo" do celular(instale no google play)
+
+
+# Diferença para o React ReactJS
+
+
+# ELementos HTML
+usamos praticamente DIV para tudo pois nao temos as mesmas tags que temos no HTML como h1, p, header
+
+Temos as tags: 
+<view>  podemos utilizar no lugar de uma div/header/footer/ qualquer container section
+<text>  Usamos para qualquer texto, paragrafo, texto negrito, h1,h2 etc..
+
+# Semantica
+Nao tem semantica(resultado significativo) no mobile.
+
+# Estilização
+Nao temos o className ou ID. 
+Precisamos passar sempre a tag style={objeto }  
+OU usamos direto o css assim  <View style= { { backgroud: red } }  onde passamos o CSS como outro objeto dentro do objeto.
+
+o React Native possui uma classe que importamos chamada StyleSheet
+import { StyleSheet, Text, View } from 'react-native';
+
+que possui o métodod .create({})/ onde podemos declarar nossos styles CSS como ex:
+
+const style = StyleSheet.create({
+    container: {
+        flex: 1,        /* usado para ocupar a tela toda*/
+        backgroudColor: '#7159c'
+    }
+});
+
+e para usar fazemos assim no return do default export function App(){
+    return(
+        <View style={styles.container}></View>
+    )
+}
+
+!!! TUDO NO  REACT NATIVE ja tem display: 'flex' por padrão
+
+!!! Nao usamos HIFEN para separar as propriedades do React Native, no lugar usamos o padrão camelCase ex: background-color fica backgroundColor
+
+### Herança de estilos: NAO EXISTE HERANÇA DE COMPONENTE PAI PARA FILHO (exemplo um color passado do container<View> para um title que sera usado em um <Text>)
+
+!!! Precisamos de uma estilização propria por Elemento. e nunca uma para varios componentes
+
+### Configurando Icone e SplashScreen
+
+Apenas substitua na pasta mobile/assets  , se precisar configurar algo como a cor de fundo veja no app.json
+
+
+# Paginas e Rotas
+
+Para ver duvidas de sintaxe veja no docs.expo.io/versions/latest   procure por routing
+
+vamos instalar o React Navigation
+'npm install @react-navigation/native'
+
+depois este comando:
+'expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view'
+
+se nao estivermos usando o expo use o : 'npm install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view'
+
+#navegação por botoes é por StackNavigator, para instalar use:
+'npm install @react-navigation/stack'
+
+
+Instale o pacote 'expo install expo-constants'
