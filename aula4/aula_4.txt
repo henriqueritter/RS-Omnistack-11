@@ -106,3 +106,21 @@ se nao estivermos usando o expo use o : 'npm install react-native-reanimated rea
 
 
 Instale o pacote 'expo install expo-constants'
+
+
+#### Usando Email e Whatsapp
+para o email instale o pacote
+'expo install expo-mail-composer'
+
+Para ver a  doc dele veja nos docs do expo procure por mail composer
+
+
+!!!DEEPLINKING
+É acessar um aplicativo do celular como se fosse via URL, é utilizado pelos smartphones
+
+
+
+### Conexao com backend
+
+Instale o axios dentro do mobile
+npm install axios   (de preferencia pare o expo e o node caso estejam rodando antes de instalar)
