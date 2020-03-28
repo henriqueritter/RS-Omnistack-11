@@ -140,7 +140,71 @@ Vamos copiar o heroes.png e a logo.svg para pasta src/assets (precisa criar ela)
 Crie a pasta pages dentro de src
 depois crie a pasta Logon dentro de pages e crie dois arquivos, index.js e styles.css
 
+Criar um arquivo chamado global.css dentro de SRC e inserir algumas fontes do google do GOOGLE FONTS
+
+#Dica para autocompletar na criacao de elementos HTML,
+-adicione as linhas
+    "emmet.syntaxProfiles": { "javascript": "jsx "},
+    "emmet.includeLanguages": {"javascript": "javascriptreact"}
+no ([F1]>Open Settings(JSON))
+
+Para usar digite ao criar um elemento
+elemento.nomeDaClasse //exemplo:
+div.logon-container  //ao dar enter ele irá criar <div className="logon-container"></div>
 
 
 
+### Dica: Pacote Icones do 
+-material Icones
+-Font awesome
+-Feather icons (usado nesse projeto)
 
+Também podemos instalar um pacote de icones com
+npm install react-icons
+
+
+
+### Configurar Rotas na aplicacao
+
+Para isso instale o pacote 'npm install react-router-dom'
+
+depois disso crie o arquivo  routes.js  na pasta SRC
+
+Exemplo arquivo de Rotas
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+import Logon from './pages/Logon';
+import Register from './pages/Register';
+
+export default function Routes(){
+    return (   
+        //Browserrouter precis estar por volta de tudo, 
+        //O Switch garante que apenas uma rota seja executada por momento, mesmo que o caminho seja semelhante
+        <BrowserRouter>
+            <Switch>
+                <Route path="/" exact component={Logon} />    // O PARAMETRO EXACT é passado pois a / esta presente em todos os outros caminhos
+                <Route path="/register" component={Register} />  // e isso atrapalha ao acessar os outros pois começam com /, o exact resolve isso.
+            </Switch>
+        </BrowserRouter>
+    )
+}
+
+
+
+#### Conectar FRONTEND com BACKEND
+navegar ate a pasta dobackend e la executar 'npm start' (para deixar o servidor node rodando)
+
+Para isso vamos instalar um cliente HTTP no nosso projeto
+entao na pasta do front end instale o npm install axios
+
+depois de instalado vamos criar uma pasta chamada services dentro da pasta SRC
+dentro desta pasta vamos criar um arquivo chamado 'api.js'
+com o conteudo:
+import axios from 'axios';
+
+const api = axios.create({
+    baseURL: 'http://localhost:3333', 
+})
+
+export default api;
