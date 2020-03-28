@@ -1,0 +1,210 @@
+#### Aula 3  Construindo a Interface WEB
+
+Escopo
+[]Limpando estrutura
+[]Conceitos do React
+    []Componente
+    []JSX
+    []Propriedades
+    []Estado
+    []Imutabilidade
+[]Pagina de login
+[]Configurando Rotas
+[]Cadastro de ONGS
+[]Listagem de casos
+[]Cadastro de um novo caso
+[]Conectando aplicação a API
+[]Enviar projeto ao Github
+
+Vamos deletar os arquivos que não sao utilizados pelo Front end
+        deleted:    README.md
+        deleted:    src/App.css
+        deleted:    src/App.test.js
+        deleted:    src/index.css
+        deleted:    src/logo.svg
+        deleted:    src/serviceWorker.js
+        deleted:    src/setupTests.js
+        deleted:    public/logo192.png
+        deleted:    public/logo512.png
+        deleted:    public/manifest.json
+        deleted:    public/robots.txt
+
+Também vamos limpar as linhas do arquivo index.js
+    import './index.css';
+    import * as serviceWorker from './serviceWorker';
+    // If you want your app to work offline and load faster, you can change
+    // unregister() to register() below. Note this comes with some pitfalls.
+    // Learn more about service workers: https://bit.ly/CRA-PWA
+    serviceWorker.unregister();
+
+E também remover do arquivo App.js
+    import logo from './logo.svg';
+    import './App.css';
+
+E no index.html dentro de public vamos deletar as linhas
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--os comentarios daqui até chegarmos a tag <title> -->
+
+
+Para startar o react, execute de dentro da pasta do FRONTEND o comando 'npm start'
+
+O react monta nossa pagina html a partir do javascript, e o Js só executa depois que a pagina index.html estiver carregada.
+
+
+#### Conceitos React
+
+### Componente (SEMPRE COM LETRA Maiscula no Começo do nome ex: App.js ou Header.js)
+Componente do REACT é uma função que retorna HTML
+
+### JSX (JavaScript XML)
+Quando o HTML está escrito dentro de um arquivo javascript, nos chamamos ele de JSX como é o caso do App.js
+
+#DICA:  Live Reload: processo de ao modificar/salvar um arquivo ele ja é utilizado pelo REACT sem precisar parar nada ( aquilo que o  npm start faz)
+
+### Propriedades
+São atributos que são passados para componentes ao inves de elmentos do html
+
+propriedade children, criada automaticamente pelo React onde passamos ela para retornar todo o conteudo passado dentro de um componente ex:
+
+App.js:
+function App() {
+  return (
+    <Header>
+      Texto a ser recuperado
+    </Header>
+
+Header.js:
+export default function Header(props){      //Componente
+    return(             
+        <header>
+                <h1>{props.children}</h1>  
+        </header>  
+
+-------------------
+Outra forma tambem de recuperar as propriedades é passar os parametros em chaves dizendo quais propriedades esperamos
+ex:
+export default function Header({ children }){      //Componente
+    return( <header> { children } </header>    
+            
+
+
+
+### Estado - Informacao que será mantida pelo componente
+se um componente precise armazenar um tipo de informacao (input do usuario, ou informacao de uma API externa)
+e ele precisar lidar com a informacao, adicionar item excluir etc..
+Nao podemos utilizar apenas variaveis convencionais, para isso precisamos do ESTADO
+
+
+Toda vez que o estado é alterado ele irá renderizar novamente as informaçoes em tela
+
+Para usar ele importamos o import React, { useState } from 'react';   
+USE STATE do react dentro do App.js
+
+Para trocar o valor do estado precisamos SOBREPOR.
+
+exemplo simples do uso do estado
+import React, { useState } from 'react';
+
+//JSX (Javascript XML)
+import Header from './Header';
+
+function App() {
+  const [counter, setCounter] = useState(0);        //a constante counter recebe o valor que queremos alterar iniciado em 0
+                                                    //e o setCounter recebe a funcao de Atualizacao do useState
+
+  //Array do useState [ valorVariavel, funcaoDeAtualizacao ]
+
+  function increment(){         //ao chamar a funcao setCounter, fazemos counter + 1
+    setCounter(counter + 1);    //
+  }
+  return (
+    <div>
+      <Header>Contador: {counter} </Header>     //valor de counter exibido entre colchetes
+      <button onClick={increment}>Incrementar</button>  //chamamos a funcao do onClick em chaves e nao em string igual no JS
+    </div>
+  );
+}
+
+
+#### Pagina de login
+Vamos copiar o heroes.png e a logo.svg para pasta src/assets (precisa criar ela).
+
+Crie a pasta pages dentro de src
+depois crie a pasta Logon dentro de pages e crie dois arquivos, index.js e styles.css
+
+Criar um arquivo chamado global.css dentro de SRC e inserir algumas fontes do google do GOOGLE FONTS
+
+#Dica para autocompletar na criacao de elementos HTML,
+-adicione as linhas
+    "emmet.syntaxProfiles": { "javascript": "jsx "},
+    "emmet.includeLanguages": {"javascript": "javascriptreact"}
+no ([F1]>Open Settings(JSON))
+
+Para usar digite ao criar um elemento
+elemento.nomeDaClasse //exemplo:
+div.logon-container  //ao dar enter ele irá criar <div className="logon-container"></div>
+
+
+
+### Dica: Pacote Icones do 
+-material Icones
+-Font awesome
+-Feather icons (usado nesse projeto)
+
+Também podemos instalar um pacote de icones com
+npm install react-icons
+
+
+
+### Configurar Rotas na aplicacao
+
+Para isso instale o pacote 'npm install react-router-dom'
+
+depois disso crie o arquivo  routes.js  na pasta SRC
+
+Exemplo arquivo de Rotas
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+import Logon from './pages/Logon';
+import Register from './pages/Register';
+
+export default function Routes(){
+    return (   
+        //Browserrouter precis estar por volta de tudo, 
+        //O Switch garante que apenas uma rota seja executada por momento, mesmo que o caminho seja semelhante
+        <BrowserRouter>
+            <Switch>
+                <Route path="/" exact component={Logon} />    // O PARAMETRO EXACT é passado pois a / esta presente em todos os outros caminhos
+                <Route path="/register" component={Register} />  // e isso atrapalha ao acessar os outros pois começam com /, o exact resolve isso.
+            </Switch>
+        </BrowserRouter>
+    )
+}
+
+
+
+#### Conectar FRONTEND com BACKEND
+navegar ate a pasta dobackend e la executar 'npm start' (para deixar o servidor node rodando)
+
+Para isso vamos instalar um cliente HTTP no nosso projeto
+entao na pasta do front end instale o npm install axios
+
+depois de instalado vamos criar uma pasta chamada services dentro da pasta SRC
+dentro desta pasta vamos criar um arquivo chamado 'api.js'
+com o conteudo:
+import axios from 'axios';
+
+const api = axios.create({
+    baseURL: 'http://localhost:3333', 
+})
+
+export default api;
