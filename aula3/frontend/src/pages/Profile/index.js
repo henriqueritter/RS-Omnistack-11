@@ -1,4 +1,4 @@
-import React, { useState, useEffect }from 'react'; //utilizando useEffect para disparar alguma função em algum determinado momento do componente assim que é mostrado em tela
+import React, { useState, useEffect } from 'react'; //utilizando useEffect para disparar alguma função em algum determinado momento do componente assim que é mostrado em tela
 import { Link, useHistory } from 'react-router-dom';
 import { FiPower, FiTrash2 } from 'react-icons/fi';
 
@@ -12,8 +12,9 @@ export default function Profile(){
     const [incidents, setIncidents] = useState([]);  //como esperamos um conjunto de informacoes do backend entao vamos iniciar ele como um array VAZIO.
     const history = useHistory();
 
-    const ongId = localStorage.getItem('ongId');        //recupera o login do storage para manter o usuario logado na pagina
+    const ongId = localStorage.getItem('ongId');       //recupera o login do storage para manter o usuario logado na pagina
     const ongName = localStorage.getItem('ongName');        //recupera o login do storage para manter o usuario logado na pagina
+
     console.log(ongId);
     useEffect(() => {
         api.get('profile', {
