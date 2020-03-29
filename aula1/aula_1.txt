@@ -79,7 +79,7 @@ Mensagem Cannot GET /
 Significa que nossa aplicação não possui nenhuma rota criada.
 
 
-Instalar extensão JSON VIEWER no google Chrome para ajudar a visualizar as JSON
+!!!Instalar extensão JSON VIEWER no google Chrome para ajudar a visualizar as JSON
 
 
 #### Entendendo o REACT
@@ -101,11 +101,13 @@ apenas os dados são entregues como resposta para preencher o front end.
 
 esse tipo de pagina nunca recarrega, otimizando a performance dando vida ao conceito de SPA. retornando apenas JSON podemos ter quantos front-ends quisermos.
 
-React é quem cria o HTML dentro da nossa pagina.mspai
+React é quem cria o HTML dentro da nossa pagina.
 React nao precisamos obrigatoriamente carregar o HTML a cada Rota.
 
 Ferramenta create react app  (cria uma aplicacao react inicial )
 Tambem podemos usar a ferramenta npx create-react-app nomeDoProjeto
+
+Vamos usar o 'npx create-react app' frontend
 
 Após o npx create-react-app meuProjeto ele irá criar os arquivos necessarios(demora um pouco).
 

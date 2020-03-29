@@ -1,20 +1,20 @@
 #### Aula 3  Construindo a Interface WEB
 
 Escopo
-[]Limpando estrutura
-[]Conceitos do React
-    []Componente
-    []JSX
-    []Propriedades
-    []Estado
-    []Imutabilidade
-[]Pagina de login
-[]Configurando Rotas
-[]Cadastro de ONGS
-[]Listagem de casos
-[]Cadastro de um novo caso
-[]Conectando aplicação a API
-[]Enviar projeto ao Github
+[] Limpando estrutura
+[] Conceitos do React
+    [] Componente
+    [] JSX
+    [] Propriedades
+    [] Estado
+    [] Imutabilidade
+[] Pagina de login
+[] Configurando Rotas
+[] Cadastro de ONGS
+[] Listagem de casos
+[] Cadastro de um novo caso
+[] Conectando aplicação a API
+[] Enviar projeto ao Github
 
 Vamos deletar os arquivos que não sao utilizados pelo Front end
         deleted:    README.md
@@ -67,10 +67,10 @@ Componente do REACT é uma função que retorna HTML
 ### JSX (JavaScript XML)
 Quando o HTML está escrito dentro de um arquivo javascript, nos chamamos ele de JSX como é o caso do App.js
 
-#DICA:  Live Reload: processo de ao modificar/salvar um arquivo ele ja é utilizado pelo REACT sem precisar parar nada ( aquilo que o  npm start faz)
+!!!DICA:  Live Reload: processo de ao modificar/salvar um arquivo ele ja é utilizado pelo REACT sem precisar parar nada ( aquilo que o  nodemon faz no NODE)
 
 ### Propriedades
-São atributos que são passados para componentes ao inves de elmentos do html
+São atributos que são passados para componentes ao inves de elementos do HTML
 
 propriedade children, criada automaticamente pelo React onde passamos ela para retornar todo o conteudo passado dentro de um componente ex:
 
@@ -98,7 +98,7 @@ export default function Header({ children }){      //Componente
 
 
 ### Estado - Informacao que será mantida pelo componente
-se um componente precise armazenar um tipo de informacao (input do usuario, ou informacao de uma API externa)
+se um componente precisar armazenar algum tipo de informacao (input do usuario, ou informacao de uma API externa)
 e ele precisar lidar com a informacao, adicionar item excluir etc..
 Nao podemos utilizar apenas variaveis convencionais, para isso precisamos do ESTADO
 
@@ -142,7 +142,7 @@ depois crie a pasta Logon dentro de pages e crie dois arquivos, index.js e style
 
 Criar um arquivo chamado global.css dentro de SRC e inserir algumas fontes do google do GOOGLE FONTS
 
-#Dica para autocompletar na criacao de elementos HTML,
+!!!Dica para autocompletar na criacao de elementos HTML,
 -adicione as linhas
     "emmet.syntaxProfiles": { "javascript": "jsx "},
     "emmet.includeLanguages": {"javascript": "javascriptreact"}
@@ -193,7 +193,7 @@ export default function Routes(){
 
 
 #### Conectar FRONTEND com BACKEND
-navegar ate a pasta dobackend e la executar 'npm start' (para deixar o servidor node rodando)
+navegar ate a pasta do backend e la executar 'npm start' (para deixar o servidor node rodando)
 
 Para isso vamos instalar um cliente HTTP no nosso projeto
 entao na pasta do front end instale o npm install axios

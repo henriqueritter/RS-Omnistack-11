@@ -1,8 +1,8 @@
 #### Aplicação Mobile
 
-[]Instalando Expo no PC
-[]Criando projeto React Native
-[]Executnado projeto
+[] Instalando Expo no PC
+[] Criando projeto React Native
+[] Executnado projeto
     [] no smartphone
     [] emuladores
     [] expo snacks  (para PC muito lento que nao roda emuladores)
@@ -80,7 +80,7 @@ e para usar fazemos assim no return do default export function App(){
 
 !!! Nao usamos HIFEN para separar as propriedades do React Native, no lugar usamos o padrão camelCase ex: background-color fica backgroundColor
 
-### Herança de estilos: NAO EXISTE HERANÇA DE COMPONENTE PAI PARA FILHO (exemplo um color passado do container<View> para um title que sera usado em um <Text>)
+!!! Herança de estilos: NAO EXISTE HERANÇA DE COMPONENTE PAI PARA FILHO (exemplo um color passado do container<View> para um title que sera usado em um <Text>)
 
 !!! Precisamos de uma estilização propria por Elemento. e nunca uma para varios componentes
 
@@ -101,7 +101,7 @@ depois este comando:
 
 se nao estivermos usando o expo use o : 'npm install react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view'
 
-#navegação por botoes é por StackNavigator, para instalar use:
+!!!navegação por botoes é por StackNavigator, para instalar use:
 'npm install @react-navigation/stack'
 
 

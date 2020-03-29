@@ -1,17 +1,17 @@
 Topicos aula 2 Omnistack 11
 
--Node.js & Express
-    -Rotas e recursos
-    -Metodos HTTP
-    -Tipos de parametros
--Configurando Nodemon
--Utilizando o insomnia
--Diferenças entre bancos de dados
--Configurando banco de dados
--Pensando nas entidades e funcionalidades
--Construção do back-end
--Adicionando módulo CSS
--Enviando back-end ao Github
+[] Node.js & Express
+    [] Rotas e recursos
+    [] Metodos HTTP
+    [] Tipos de parametros
+[] Configurando Nodemon
+[] Utilizando o insomnia
+[] Diferenças entre bancos de dados
+[] Configurando banco de dados
+[] Pensando nas entidades e funcionalidades
+[] Construção do back-end
+[] Adicionando módulo CSS
+[] Enviando back-end ao Github
 
 
 Dentro do Node
@@ -54,7 +54,7 @@ ex: app.get('/users?name=Henrique', (request, response) => {
     ai dentro de params teremos o valor dos parametros passados url por exemplo: 'localhost:3333/users?name=Henrique'  vai retornar name: 'henrique'
 
 
-    para acessar os route params usamos o request.params da mesma  maneira do query, declarando uma constante que recebe quest.params;
+    para acessar os route params usamos o request.params da mesma  maneira do query, declarando uma constante que recebe query.params;
 
 Request body pega o que foi passado no body, como exemplo um JSON com suas informacoes, para isso usamos o metodo POST, e no 
 insomnia usamos a parte do body como JSON, dentro do app configuramos assim: 
@@ -118,7 +118,7 @@ Para hoje usaremos apenas o ambiente de development ficando assim dentro do arqu
  }
 
 
-module.exports = routes;  //exporta variavel de um arquivo no NODE
+!!!module.exports = routes;  //exporta variavel de um arquivo no NODE
 
 E para importar faça dentro do arquivo desejado
 const routes = require('./routes');  //é necessario colocar ./  para o NODE entender que se trata de um arquivo e não um pacote
