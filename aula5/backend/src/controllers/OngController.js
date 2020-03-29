@@ -1,4 +1,4 @@
-const crypto = require('crypto'); //pacote do NODE, sera usado para gerar a ID da ONG
+const generateUniqueId = require('../utils/generateUniqueId');
 const connection = require('../database/connection');
 
 module.exports = {
@@ -15,7 +15,7 @@ module.exports = {
         //para filtrar os dados que vamos receber faça
         const { name, email, whatsapp, city, uf } = request.body;
 
-        const id = crypto.randomBytes(4).toString('HEX'); //ira gerar uma string aleatoria de 4 bytes que sera convertida para HEXA
+        const id = generateUniqueId();
 
         await connection('ongs').insert({       //await faz com que ele espere o insert terminar para continuar
             id,             //linha de cima passamos como parametro o nome de tabela, e o insert como o tipo de operacao

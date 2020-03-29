@@ -1,1 +1,137 @@
 #### Aula 5 
+
+Escopo:
+[] Adicionando validação(backend)
+[] Adicionando testes
+    [] Por que fazer testes?
+    [] TDD
+    [] Configurando Jest
+    [] Tipos de testes
+    [] Configurando banco de testes
+    [] Instalando supertest
+    [] Testando rota de autenticação
+[] Deploy
+    [] Alternativas
+    [] Qual escolher
+[] Estudos daqui pra frente
+    [] Padrões de código: ESLint, Prettier
+    [] Autenticação JWT
+    [] Styled Components
+[] Dicas para aproveitar melhor
+    [] Github
+    [] Linkedin
+
+
+### Validação
+
+Vamos utilizar biblioteca 'celebrate' para validar 
+//Documentacao em github.com/arb/celebrate
+//Usa por baixo dos panos a biblioteca JOI de validação do JS, o celebrate integra o JOI com o express.
+instalar:
+'npm install celebrate'
+
+A Validação ficara junto da def de rotas
+
+Ex de uma validacao nas rotas:
+routes.delete('/incidents/:id', celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+        id: Joi.number().required(),
+    })
+}), IncidentController.delete);
+
+!!! SEMPRE adicione os erros no index.JS
+const { errors } = require('celebrate');    //Importado para tratar os erros (para nao vir dos 500)
+app.use(errors());  //tratametno de erros do celebrate
+
+!!!Express usa conceito de middleware (sobre a validação ser antes da rota)
+
+
+### Adicionando testes
+
+### TDD  (Test-driven Development) (Desenvolvimento dirigido a testes)
+Duas formas de fazer isso:
+-Desenvolver o teste após terminar a aplicação
+-Desenvolver o teste antes de criar a aplicação(servirá de guia).
+
+### Configurando Jest (para node/react e react native) 
+dentro do backend: 'npm install jest'
+
+após instalação digite na raiz do backend: 
+'npx jest --init'
+Algunas perguntas do jest init:
+
+√ Would you like to use Jest when running "test" script in "package.json"? ... yes
+√ Choose the test environment that will be used for testing » node
+√ Do you want Jest to add coverage reports? ... no
+Automatically clear mock calls and instances between every test? (se deseja que as variaveis de um teste NAO sejam definidas para outro) = coloque Y
+
+ele irá criar um arquivo chamado jest.config.js na raiz
+vamos criar uma pasta chamada backend/tests
+
+### Tipos de testes
+Testes unitarios(pasta tests/unit)
+Testa um pedaço da nossa aplicação de forma isolada, ex: funcao de criar ID para ONG se for em outro arquivo(que esta no src/utils/generateUniqueId.js).
+
+Ele testa uma funcao que faça algo muito especifico e isolado, assim evita de encostar em outra API de CEP ou outra funcao desnecessaria para o teste(evitando os side-effects(efeitos colaterais))
+
+O Arquivo do teste unitario criado em backend/tests/units utiliza o mesmo nome da funcao a ser testada com a extensao .spec.js por exemplo: 'generateUniqueId.spec.js'
+
+
+Testes de integração (pasta tests/integration)
+Vao testar um fluxo de uma rota inteira da nossa aplicação, eles vao entrar na rota de autenticação, enviar o ID da ONG, vai ver se a resposta é tal.
+ELE TESTA POR COMPLETO UMA FUNCIONALIDADE(OU ROTA) da nossa aplicação.
+
+PARA EXECUTAR OS TESTES FAÇA: 'npm test'
+
+
+### Configurando banco de dados de testes (para nao alterar nada do banco de produção e ficar apenas no ambiente de dev)
+Para isso:
+-Abra o knexfile e crie uma nova conexão(copie a conexao development) e vamos chamar ela de test e trocar o novo do banco no parametro filename
+
+Instale o cross-env com comando 'npm install cross-env'
+após instalado abra o package.json e altere o script 'test'(abaixo de start) coloque o valor: 'cross-env NODE_ENV=test jest
+Assim quando executarmos o script de test teremos uma variavel de ambiente chamada NODE_ENV livre
+
+Para acessar a variavel de ambiente use dentro do connection:  'const config = process.env.NODE_ENV === 'test ? configuration.test : configuration.development'  (chamamos isso de variaveis de ambiente )
+//para mias info procure 'variaveis ambiente Rocket seat node'
+
+#------------------------
+### Para testes de integração:
+-Para fazer as chamadas da aplicação com chamadas HTTP e verificar as validações do retorno utilizaremos a biblioteca supertest
+'npm install supertest -D'  o -D é porque ele será uma dependencia de DESENVOLVIMENTO.
+
+!!! CASO TENHA INSTALADO ALGUMA DEPENDENCIA DE FORMA NORMAL QUANDO ERA PRA TER FEITO COMO DE DESENVOLVIMENTO (-D) faça:
+-abra o package.json e recorte a dependencia e cole dentro do objeto 'devDependencies'
+
+!!! Para nao subir nossa aplicação enqunato fazemos os testes vamos fazer o seguinte:
+altere o arquivo src/index.js para src/app.js
+    coloque o arquivo app.js para exportar o app e remova o listen deste arquivo e coloque no server.js 
+    insira no final do app.js:   'module.export = app; '
+crie um arquivo chamado src/server.js
+    -alterar o caminho do script de start no package.json para o caminho src/server.js
+
+
+### Deploy onde hospedar
+-DEPLOY NODE:
+    Aplicação experimental, de testes e tals..
+    -Hospedar no 'heroku.com'  
+
+    Aplicação em produção:
+    -digitalocean.com  algo como 5 dolares por mes  (tudo tem dicas no youtube da ROCKETSEAT) deploy de apps node.js | masterclass #03 é na digital ocean
+
+    Aplicação GIGANTE! ?  ai é melhorar procurar alguem de devOps para ajudar nisso
+    -AWS, GoogleCloud, MicrosoftAzure.
+
+DEPLOY REACT (FRONT-END)
+    Aplicações de testes: 
+    -netlify.com  (para apps grands custa caro..) É ESPECIFICO PARA FRONT-END NAO USA NODE AQUI DENTRO.
+
+DEPLOY REACT NATIVE(ai é com appstore ou playstore..)
+    -gerando APK EXPO(code/Drops) (procure no youtube da rocketseat)
+
+
+###  ESTUDOS / RECOMENDAÇÕES:
+    Padroes de codigo: ESLITN, Prettieer
+    Autenticação JWT
+    STyled Components (REACT e REACT NATIVE para estilização).
+
