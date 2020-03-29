@@ -1,3 +1,6 @@
+import 'intl';          //importação para resolver o formato de moeda em androids
+import 'intl/locale-data/jsonp/pt-BR'; //importando idioma Portugues -BR
+
 import axios from 'axios';
 
 const api = axios.create({

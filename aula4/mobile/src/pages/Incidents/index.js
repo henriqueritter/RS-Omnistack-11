@@ -11,27 +11,44 @@ import styles from './styles';
 
 export default function Incidents(){
     const [incidents, setIncidents] = useState([]);
+    const [total, setTotal] = useState(0);
+    const [page, setPage] = useState(1);        //verifica qual pagina estamos para exibir na rolagem 'infinita'
+    const [loading, setLoading] = useState(false);  //quando estamos buscando dados novos evitar que os dados antigos sejam buscados novamente, carregando uma pagina por vez
 
     const navigation = useNavigation();
 
-    function navigateToDetail(){
-        navigation.navigate('Detail');
+    function navigateToDetail(incident){
+        navigation.navigate('Detail', { incident });
     }
 
     async function loadIncidents() {
-        const response = await api.get('incidents');
+        if (loading) {
+            return;     //usado para evitar que mais de uma requisição seja feita no momento
+        }
 
-        setIncidents(response.data);
+        if (total > 0 && incidents.length === total){  //se true nao busque mais informações
+            return;
+        }
+        setLoading(true);
+        const response = await api.get('incidents', {
+            params: { page }
+        });
+
+        setIncidents([ ... incidents, ... response.data]);  // os ... servem para ANEXAR DOIS VETORES, para que a cada nova pagina ele não perca os dados ja cadastrados na rolagem
+        setTotal(response.headers['x-total-count']);
+
+        setPage(page + 1);
+        setLoading(false);
     }
     useEffect(() => {
         loadIncidents();
     }, []);
     return(
         <View style={styles.container}>
-            <View style={styles.headr}>
+            <View style={styles.header}>
                 <Image source={logoImg} />
                 <Text style={styles.header.Text} >
-                    Total de <Text style={styles.header.TextBold}>0 casos</Text>.
+                    Total de <Text style={styles.header.TextBold}>{total} casos</Text>.
                 </Text>
             </View>
             
@@ -43,6 +60,8 @@ export default function Incidents(){
                 style={styles.incidentList}
                 keyExtractor={incident => String(incident.id)}
                 showsVerticalScrollIndicator={false}
+                onEndReached={loadIncidents}
+                onEndReachedThreshold={0.2}
                 renderItem={({ item: incident }) => (
                     <View style={styles.incident}>
                         <Text style={styles.iProperty}>ONG:</Text>
@@ -52,10 +71,14 @@ export default function Incidents(){
                         <Text style={styles.incidentValue}>{incident.title}</Text>
 
                         <Text style={styles.incidentProperty}>VALOR:</Text>
-                        <Text style={styles.incidentValue}>{incident.value}</Text>
+                        <Text style={styles.incidentValue}>
+                            {Intl.NumberFormat('pt-BR', { 
+                                style: 'currency', 
+                                currency: 'BRL'
+                            }).format(incident.value)}</Text>
 
                         <TouchableOpacity 
-                            style={styles.detailsButton} onPress={navigateToDetail}
+                            style={styles.detailsButton} onPress={() => navigateToDetail(incident)}
                         >
                             <Text style={styles.detailsButtonText}>Ver mais detalhes</Text>
                             <Feather name="arrow-right" size={16} color="#E02041" />

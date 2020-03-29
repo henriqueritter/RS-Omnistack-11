@@ -124,3 +124,9 @@ Para ver a  doc dele veja nos docs do expo procure por mail composer
 
 Instale o axios dentro do mobile
 npm install axios   (de preferencia pare o expo e o node caso estejam rodando antes de instalar)
+
+!!!Instale o 'npm install intl' na pasta do mobile para resolver o problema do formato de moeda no mobile.
+Este pacote vai adicionar o intl caso não exista onde na aplicação, apos a instalação:
+
+importe ele dentro do api.js para disponibilizar para todo o app.
+
